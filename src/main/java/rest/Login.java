@@ -1,8 +1,8 @@
 package rest;
 
-
 import brugerautorisation.data.Bruger;
 import brugerautorisation.transport.rmi.Brugeradmin;
+import database.UserDTO;
 import java.net.MalformedURLException;
 import org.json.JSONObject;
 import javax.ws.rs.POST;
@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import jwtHandler.JWTHandler;
 
 @Path("login")
 public class Login {
@@ -20,30 +21,30 @@ public class Login {
     @Produces("application/json")
     public String login(String loginInfo) throws java.rmi.RemoteException {
         JSONObject userinfo = new JSONObject(loginInfo);
-
+        UserDTO user = new UserDTO();
         Brugeradmin ba = null;
+        Bruger b;
+        String uname = userinfo.getString("username"), upass = userinfo.getString("password");
 
         try {
             ba = (Brugeradmin) Naming.lookup("rmi://javabog.dk/brugeradmin");
-        } catch (MalformedURLException | NotBoundException | RemoteException e){
-        }
+        } catch (MalformedURLException | NotBoundException | RemoteException e){}
 
-        Bruger b;
-        JSONObject valid = new JSONObject();
-        
         try {
-            b = ba.hentBruger(userinfo.getString("username"), userinfo.getString("password"));
-            valid.put("Valid", true);
-            System.out.println(valid);
-            System.out.println(valid.toString());
-
-        } catch (IllegalArgumentException e) {
-            //e.printStackTrace();
-            valid.put("Valid", false);
-
-        }
-        
-        return valid.toString();
-
+            System.out.println("LOGGING IN");
+            System.out.println(uname+" "+upass);
+            b = ba.hentBruger(uname, upass);
+            user.setStudentID(uname);
+            user.setScore(1);
+            user.setNumber_of_tries(0);
+            user.setTime_used(100);
+            System.out.println(user);
+            System.out.println(JWTHandler.generateJwtToken(user));
+            return JWTHandler.generateJwtToken(user);
+        } catch (Exception e) {
+            System.out.println("Error logging in with: ");
+            e.printStackTrace();
+            return null;
+        } 
     }
 }
