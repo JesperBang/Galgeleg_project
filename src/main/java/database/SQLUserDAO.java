@@ -45,10 +45,9 @@ public class SQLUserDAO implements UserDAO {
 	@Override
 	public List<UserDTO> getStudentList() throws DALException {
 		List<UserDTO> list = new ArrayList<UserDTO>();
-                System.out.println("inside userlist");
 		ResultSet rs;
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(1)
-			rs = connector.doQuery("select * from brugere;");
+			rs = connector.doQuery("select * from brugere order by score DESC;");
 		} catch (Exception e) {
 			throw new DALException(e.getMessage());
 		}
