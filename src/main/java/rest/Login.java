@@ -45,6 +45,6 @@ public class Login {
             System.out.println("Error logging in with: ");
             e.printStackTrace();
             return null;
-        }
+        } 
     }
 }
