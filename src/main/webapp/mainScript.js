@@ -14,6 +14,8 @@ function login(){
         data: JSON.stringify(person),
         success: function(response) {
             var login = response.Valid;
+            alert(response);
+            alert(login);
             // Login true
             if (login === true){
             alert('ok');

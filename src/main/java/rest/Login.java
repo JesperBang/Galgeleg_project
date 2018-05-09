@@ -34,6 +34,8 @@ public class Login {
         try {
             b = ba.hentBruger(userinfo.getString("username"), userinfo.getString("password"));
             valid.put("Valid", true);
+            System.out.println(valid);
+            System.out.println(valid.toString());
 
         } catch (IllegalArgumentException e) {
             //e.printStackTrace();
