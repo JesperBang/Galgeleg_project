@@ -16,7 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.impl.crypto.MacProvider;
-
+ 
 public class JWTHandler {
 		private static final int TOKEN_EXPIRY = 15;
 
