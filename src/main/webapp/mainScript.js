@@ -3,7 +3,7 @@
 	    jqxhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user"))
 	});
  var path = 'http://localhost:8080/mavenproject1/rest';
-  
+ 
     // On login load useradmin page
     $("#login_form").submit(function() {
 	event.preventDefault();
@@ -12,7 +12,10 @@
             "username":document.getElementById("usernameField").value,
             "password":document.getElementById("pswField").value
         };
-        
+
+        var encrypted = CryptoJS.AES.encrypt(person.toString(), 'withthesewordsbeguardedourplaintextpassword');
+        console.log("Encrypted user: "+encrypted.toString());
+       
 	$.ajax({	
             url: path+"/login",
             contentType: "application/json",
