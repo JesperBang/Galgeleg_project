@@ -47,7 +47,7 @@ public class SQLUserDAO implements UserDAO {
 		List<UserDTO> list = new ArrayList<UserDTO>();
 		ResultSet rs;
 		try { //Files.readAllLines(Paths.get("/UserCommands.txt")).get(1)
-			rs = connector.doQuery("select * from brugere order by score DESC;");
+			rs = connector.doQuery("select * from brugere order by abs(score) DESC;");
 		} catch (Exception e) {
 			throw new DALException(e.getMessage());
 		}

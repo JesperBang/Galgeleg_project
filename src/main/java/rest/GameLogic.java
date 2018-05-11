@@ -46,7 +46,7 @@ public class GameLogic {
     
     @Path("nulstil")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String Nulstil() throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
@@ -76,7 +76,7 @@ public class GameLogic {
     
     @Path("getordet")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String GetOrdet() throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
@@ -92,14 +92,17 @@ public class GameLogic {
     
     @Path("getbrugtebogstaver")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public ArrayList<String> GetBrugteBogstaver() throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
         
+        ArrayList<String> bogstaver = null;
+        
+    
         try {
-            ArrayList<String> response = game.getBrugteBogstaver();
-            return response;
+            bogstaver = game.getBrugteBogstaver();
+            return bogstaver;
         } catch (Exception e) {
             return null;
         }
@@ -107,7 +110,7 @@ public class GameLogic {
     
     @Path("getsynligtord")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String GetSynligtOrd() throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
@@ -122,7 +125,7 @@ public class GameLogic {
     
     @Path("erspilletvundet")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Boolean ErSpilletVundet() throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
@@ -137,7 +140,7 @@ public class GameLogic {
     
     @Path("erspillettabt")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Boolean ErSpilletTabt() throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
@@ -152,7 +155,7 @@ public class GameLogic {
     
     @Path("gaetbogstav")
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public String GaetBogstav(String guess) throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
