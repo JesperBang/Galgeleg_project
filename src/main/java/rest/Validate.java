@@ -30,12 +30,12 @@ public class Validate {
     public boolean validJWT() {
         String header = request.getHeader("Authorization");
         System.out.println("header: " +header);
-        
+
         try {
             if(header != null){
                 JWTHandler.validateToken(header.split(" ")[1]);
                 return true;
-            }else{ return false;}
+            } else { return false; }
         } catch (AuthException e) { 
             e.printStackTrace(); 
             return false;
