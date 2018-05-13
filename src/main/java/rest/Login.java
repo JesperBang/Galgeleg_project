@@ -35,9 +35,6 @@ public class Login {
             System.out.println(uname+" "+upass);
             b = ba.hentBruger(uname, upass);
             user.setStudentID(uname);
-            user.setScore(1);
-            user.setNumber_of_tries(0);
-            user.setTime_used(100);
             System.out.println(user);
             System.out.println(JWTHandler.generateJwtToken(user));
             return JWTHandler.generateJwtToken(user);
