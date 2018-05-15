@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Galgespillet</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="galgespil.js"></script>
+    </head>
+    <body onload="start()">
+        <h1>Velkommen til Galgespillet!</h1>
+        <h2>Gæt ordet for at vinde!</h2>
+        <input id="letter" onfocus="this.value=''" type="text">
+        
+        <p id="answer"></p>
+        <p id="counter"></p>
+        <p id="status"></p>
+        <p id="usedLetters"></p>
+        <p id="livesLeft"></p>
+        
+        <input type="button" value="Hent ord" onClick="getOrdet()"/>
+        <input type="button" value="Gæt!" onclick="guessLetter()"/>
+        
+        <div></div>
+    </body>
+</html>
