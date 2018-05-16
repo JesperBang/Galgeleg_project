@@ -22,12 +22,8 @@
             dataType: "text",
             success: function(resp) {
                 console.log(resp);
-<<<<<<< HEAD:src/main/webapp/mainScript.js
                 
 		if (resp == null) {
-=======
-		if (resp == null ) {
->>>>>>> 51710f0d7feed93d26a3d46a93bcdefc82b9e113:src/main/webapp/JavaScript/mainScript.js
                     alert("Wrong Credentials!");
 		} else {
                     console.log(resp);	
