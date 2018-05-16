@@ -8,15 +8,11 @@
     // On login load useradmin page
     $("#login_form").submit(function() {
 	event.preventDefault();
-	document.getElementById("loginBtn").disabled = true;
-        document.getElementById("loginBtn").style.opacity = 0.5;
-        document.getElementById("loginBtn").style.cursor = "progress";
-        
+	
         var person={
             "username":document.getElementById("usernameField").value,
             "password":document.getElementById("pswField").value
         };
-        
         
 	$.ajax({	
             url: path+"/login",
@@ -25,25 +21,14 @@
             data: JSON.stringify(person),
             dataType: "text",
             success: function(resp) {
-<<<<<<< HEAD:src/main/webapp/mainScript.js
                 console.log(resp);
                 
 		if (resp == null) {
-=======
-		if (resp == null ) {
->>>>>>> collect:src/main/webapp/JavaScript/mainScript.js
                     alert("Wrong Credentials!");
-                    	document.getElementById("loginBtn").disabled = false;
-                        document.getElementById("loginBtn").style.opacity = 01;
-                        document.getElementById("loginBtn").style.cursor = "pointer";
-                   
 		} else {
                     console.log(resp);	
                     localStorage.setItem("user", resp); //session Storage						
                     location.href = 'index.html';
-                    document.getElementById("loginBtn").disabled = false;
-                    document.getElementById("loginBtn").style.opacity = 01;
-                    document.getElementById("loginBtn").style.cursor = "pointer";
                     //var name = $.parseJSON(window.atob(resp.split(".")[1]));
                     //console.log(name);
                     //console.log(name.UserDTO.firstname);		
@@ -53,14 +38,43 @@
             error: function(resp) {
                 //Error handling...
 		console.log(resp);
-                
             }	
 	});
         return false;
-       
     });
 
+function forgotPass(){
+    var student={
+        "student":document.getElementById("emailpsw").value
+    };
 
+  
+    $.ajax({
+        url: path+'/email',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(student),
+        success: function(response) {
+            var send = response.Valid;
+            // Login true
+            if (send === true){
+            alert('Email sent to student email');
+            location.href = 'loginPage.html'
+            }
+            // Login false
+            else {
+                     alert('Wrong student ID');
+                     return false;
+            }
+        },
+        error: function(){
+            
+            alert("Error");
+        }
+    });
+
+    return false;
+}
 
 function scores() {
  
@@ -81,8 +95,3 @@ function scores() {
      });    
 }
  });
- 
- 
- function setframe(url) {
-	document.all.frame.src=url;
-}

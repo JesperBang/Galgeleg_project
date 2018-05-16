@@ -24,7 +24,6 @@ public class Login {
         UserDTO user = new UserDTO();
         Brugeradmin ba = null;
         Bruger b;
-        
         String uname = userinfo.getString("username"), upass = userinfo.getString("password");
 
         try {
