@@ -8,7 +8,10 @@
     // On login load useradmin page
     $("#login_form").submit(function() {
 	event.preventDefault();
-	
+	document.getElementById("loginBtn").disabled = true;
+        document.getElementById("loginBtn").style.opacity = 0.5;
+        document.getElementById("loginBtn").style.cursor = "progress";
+        
         var person={
             "username":document.getElementById("usernameField").value,
             "password":document.getElementById("pswField").value
@@ -22,13 +25,19 @@
             data: JSON.stringify(person),
             dataType: "text",
             success: function(resp) {
-		if (resp === null) {
+		if (resp === null || resp === undefined ) {
                     alert("Wrong Credentials!");
+                    	document.getElementById("loginBtn").disabled = false;
+                        document.getElementById("loginBtn").style.opacity = 01;
+                        document.getElementById("loginBtn").style.cursor = "pointer";
                    
 		} else {
                     console.log(resp);	
                     localStorage.setItem("user", resp); //session Storage						
                     location.href = 'index.html';
+                    document.getElementById("loginBtn").disabled = false;
+                    document.getElementById("loginBtn").style.opacity = 01;
+                    document.getElementById("loginBtn").style.cursor = "pointer";
                     //var name = $.parseJSON(window.atob(resp.split(".")[1]));
                     //console.log(name);
                     //console.log(name.UserDTO.firstname);		
@@ -67,9 +76,6 @@ function scores() {
 }
  });
  
- function disableLogin() {
-     document.getElementById("login_form").disabled = true;
- }
  
  function setframe(url) {
 	document.all.frame.src=url;
