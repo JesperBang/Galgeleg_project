@@ -47,7 +47,7 @@ function populateTable() {
                 $('<td>').text(item.student_Id),
 		$('<td>').text(item.number_of_tries),
 		$('<td>').text(item.time_used),
-		$('<td>').text(item.score)			
+		$('<td>').text(item.score.toFixed(3))			
             ).appendTo('#scoretable');
 	});
 				
