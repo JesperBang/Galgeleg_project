@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16-05-2018, 23:20:12
+    Author     : Andreas
+*/
+
+.loader {
+  border: 9px solid 	#A9A9A9;
+  border-radius: 50%;
+  border-top: 9px solid #e7ebe8;
+  width: 75px;
+  height: 75px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 3;
+  top: 20%;
+  left: 50%;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
