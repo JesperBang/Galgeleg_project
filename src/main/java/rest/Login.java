@@ -32,13 +32,17 @@ public class Login {
         } catch (MalformedURLException | NotBoundException | RemoteException e){}
 
         try {
-            System.out.println("LOGGING IN");
-            System.out.println(uname+" "+upass);
-            b = ba.hentBruger(uname, upass);
-            user.setStudentID(uname);
-            System.out.println(user);
-            System.out.println(JWTHandler.generateJwtToken(user));
-            return JWTHandler.generateJwtToken(user);
+            b=ba.hentBruger(uname, upass);
+            if(b.brugernavn.equals(uname) && b.adgangskode.equals(upass)){
+              System.out.println("LOGGING IN");
+              System.out.println(uname+" "+upass);
+
+              user.setStudentID(uname);
+              System.out.println(user);
+
+              return JWTHandler.generateJwtToken(user);
+            }else{ return null; }
+            
         } catch (Exception e) {
             System.out.println("Error logging in with: ");
             e.printStackTrace();
