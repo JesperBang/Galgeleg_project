@@ -17,13 +17,13 @@
 <h1>Forgot your password?</h1>
 <br>
 <br>
-<form>
+<form onSubmit="return forgotPass()">
 Enter your Student ID below and we will send you a new password. <br>
-<input type="text" class="forgot" id="emailpsw" placeholder="Student ID" required>
+<input type="text" class="forgot" id="emailpsw" placeholder="Student ID" required />
 <br>
-<button onclick="return forgotPass()">Email me</button>
-
+<button id="forgotBtn">Email me</button>
 </form>
+
 <br>
 If you can't remember your student ID contact system administrator.
 
