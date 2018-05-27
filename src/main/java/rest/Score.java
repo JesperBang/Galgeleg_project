@@ -39,7 +39,7 @@ public class Score {
         Service service = Service.create(url, qname);
         soapI = service.getPort(UserDAOSOAPI.class);
     }
-    
+     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserDTO> ShowScores() {
