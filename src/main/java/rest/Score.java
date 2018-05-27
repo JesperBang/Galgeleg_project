@@ -17,9 +17,12 @@ import database.UserDTO;
 import galgeleg.GalgeI;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import static rest.GameLogic.game;
+
 
 /**
  *
@@ -34,24 +37,25 @@ public class Score {
     Service service;
         
     public Score() throws MalformedURLException {
-        URL url = new URL("http://ubuntu4.saluton.dk:9915/SQL_Soap?wsdl");
+        URL url = new URL("http://ec2-35-177-117-75.eu-west-2.compute.amazonaws.com:9915/SQL_Soap?wsdl");
         QName qname = new QName("http://database/", "SOAPImplService");
         Service service = Service.create(url, qname);
         soapI = service.getPort(UserDAOSOAPI.class);
     }
     
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserDTO> ShowScores() {
+    public List<UserDTO> ShowScores() throws MalformedURLException {
+
 	List<UserDTO> allScores = null;
 
-	try {
+        try {
             allScores = soapI.getStudentList();
-            System.out.println(allScores);
-        } catch (DALException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-	}
-            return allScores;
-	}
+        } catch (DALException ex) {
+            Logger.getLogger(Score.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(allScores);
+        return allScores;
+    }
 }

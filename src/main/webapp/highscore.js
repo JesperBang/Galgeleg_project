@@ -8,7 +8,8 @@
 	$( document ).ajaxSend(function( event, jqxhr, settings ) {
 	    jqxhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user"))
 	});
- var path = 'http://ubuntu4.saluton.dk:20002/Galgeleg/rest';
+ //var path = 'http://ubuntu4.saluton.dk:20002/Galgeleg/rest';
+ var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest';
  //var path = 'http://localhost:8080/mavenproject1/rest';
  
  populateTable();
@@ -34,9 +35,9 @@ function populateTable() {
 	$('<tr>').append(
             $('<th>').text("Placement"),
             $('<th>').text("User ID"),
-            $('<th>').text("number_of_tries"),
-            $('<th>').text("time_used"),
-            $('<th>').text("score")
+            $('<th>').text("Number of wrong guesses"),
+            $('<th>').text("Time used"),
+            $('<th>').text("Score")
 	).appendTo("#scoretable");
 				
 	//Loop through users and append them to the table in html

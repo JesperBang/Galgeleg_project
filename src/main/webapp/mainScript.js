@@ -2,7 +2,8 @@
 	$( document ).ajaxSend(function( event, jqxhr, settings ) {
 	    jqxhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user"))
 	});
- var path = 'http://ubuntu4.saluton.dk:20002/Galgeleg/rest';
+ //var path = 'http://ubuntu4.saluton.dk:20002/Galgeleg/rest';
+var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest';
  //var path = 'http://localhost:8080/mavenproject1/rest';
   
     // On login load useradmin page
