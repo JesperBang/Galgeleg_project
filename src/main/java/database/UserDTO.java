@@ -12,7 +12,7 @@ import java.util.List;
 public class UserDTO {
     private static final long serialVersionUID = -7272979590540794430L;
  
-	public String student_Id;                     
+	public String student_Id, href = "http://localhost:8084/mavenproject1/rest/score";                     
 	
 	int number_of_tries; 
 	
@@ -35,6 +35,8 @@ public class UserDTO {
         public void setScore(double score){this.score = score;};
         public double getScore(){return score;}
         
+        public void getHref(String href){this.href = href;}
+        public String getHref(){return href;}
     
-	public String toString() { return "\n" + student_Id + "\t" + number_of_tries + "\t" + time_used + "\t" + score; }
+	public String toString() { return "\n" + student_Id + "\t" + number_of_tries + "\t" + time_used + "\t" + score + "\t" + href; }
 }

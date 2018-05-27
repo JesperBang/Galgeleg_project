@@ -1,5 +1,5 @@
 //var path = 'http://ubuntu4.saluton.dk:20002/Galgeleg/rest';
- var path = 'http://localhost:8080/mavenproject1/rest';
+ var path = 'http://localhost:8084/mavenproject1/rest';
   
 function forgotPass(){
     document.getElementById("forgotBtn").disabled = true;

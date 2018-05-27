@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 });
 //var path = 'http://ubuntu4.saluton.dk:20002/mavenproject1/rest/game';
-var path = 'http://localhost:8080/mavenproject1/rest/game';
+var path = 'http://localhost:8084/mavenproject1/rest/game';
                 
 var string;
 var lives = 6;
