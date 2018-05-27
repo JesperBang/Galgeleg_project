@@ -14,20 +14,17 @@ import org.json.JSONException;
 
 @Path("email")
 public class email {
-
 //send email to according to student id
     @POST
     @Produces("application/json")
     public String email(String ID) throws java.rmi.RemoteException {
         JSONObject studentID = new JSONObject(ID);
-
         Brugeradmin ba = null;
 
         try {
             ba = (Brugeradmin) Naming.lookup("rmi://javabog.dk/brugeradmin");
         } catch (MalformedURLException | NotBoundException | RemoteException e){
         }
-
         JSONObject valid = new JSONObject();
 
         try {
@@ -37,7 +34,6 @@ public class email {
             //e.printStackTrace();
             valid.put("Valid", false);
         }
-        
         return valid.toString();
     }
 }
