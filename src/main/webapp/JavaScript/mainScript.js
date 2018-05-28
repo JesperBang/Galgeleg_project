@@ -23,9 +23,10 @@ $(document).ready(function () {
             contentType: "application/json",
             method: 'POST',
             data: JSON.stringify(person),
-            dataType: "text",
+            dataType: "json",
             success: function (resp) {
-                console.log(resp);
+
+                console.log(resp["jwt"]);
                 console.log(resp.valueOf(status));
                 if (resp == null) {
                     alert("Wrong Credentials!");
@@ -35,7 +36,7 @@ $(document).ready(function () {
 
                 } else {
                     console.log(resp);
-                    localStorage.setItem("user", resp); //session Storage						
+                    localStorage.setItem("user", resp["jwt"]); //session Storage						
                     location.href = 'index.html';
                     document.getElementById("loginBtn").disabled = false;
                     document.getElementById("loginBtn").style.opacity = 01;

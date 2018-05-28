@@ -8,18 +8,30 @@ package database;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import org.json.JSONObject;
 public class UserDTO {
     private static final long serialVersionUID = -7272979590540794430L;
  
-	public String student_Id, href = "http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/score";                     
-	
+	public String student_Id;                     
+        
 	int number_of_tries; 
 	
 	double time_used;     
 	
-	double score;                 
-
+	double score; 
+        
+        Map<String, String> map = new HashMap<String, String>(){
+            {
+                put("Rel", "user");
+                put("href", "http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/score");
+                put("Method", "GET");
+            }
+        };
+         
 	public UserDTO(){
 	}
 
@@ -35,8 +47,14 @@ public class UserDTO {
         public void setScore(double score){this.score = score;};
         public double getScore(){return score;}
         
-        public void getHref(String href){this.href = href;}
-        public String getHref(){return href;}
+        
+        public Map<String, String> getLinks() {
+            return map;
+	}
+        
+        public void setLinks(Map<String, String> map) {
+            this.map = map;
+	}
     
-	public String toString() { return "\n" + student_Id + "\t" + number_of_tries + "\t" + time_used + "\t" + score + "\t" + href; }
+	public String toString() { return "\n" + student_Id + "\t" + number_of_tries + "\t" + time_used + "\t" + score + "\t" + map; }
 }
