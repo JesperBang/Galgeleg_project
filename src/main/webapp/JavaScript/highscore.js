@@ -9,8 +9,8 @@
 	    jqxhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user"))
 	});
  //var path = 'http://ubuntu4.saluton.dk:20002/Galgeleg/rest';
- //var path = 'http://localhost:8084/mavenproject1/rest';
- var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest';
+ var path = 'http://localhost:8084/mavenproject1/rest';
+ //var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest';
  
  populateTable();
  
