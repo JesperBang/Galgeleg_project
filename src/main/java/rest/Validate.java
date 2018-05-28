@@ -10,6 +10,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import jwtHandler.JWTHandler;
 import jwtHandler.JWTHandler.AuthException;
 
@@ -27,20 +29,20 @@ public class Validate {
     //Validate user login token
     @GET
     @Produces("application/json")
-    public boolean validJWT() {
+    public Response validJWT() {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
         try {
             if (header != null) {
                 JWTHandler.validateToken(header.split(" ")[1]);
-                return true;
+                return Response.status(Response.Status.OK).build();
             } else {
-                return false;
+                return Response.status(Response.Status.UNAUTHORIZED).build();
             }
         } catch (AuthException e) {
             e.printStackTrace();
-            return false;
+            return Response.status(Response.Status.UNAUTHORIZED).entity("Failed to validate jwt due to: \n\n"+e.toString()).build();
         }
 
     }
