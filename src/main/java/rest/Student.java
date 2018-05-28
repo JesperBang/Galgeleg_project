@@ -11,18 +11,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import database.DALException;
-import database.UserDAO;
 import database.UserDAOSOAPI;
 import database.UserDTO;
-import galgeleg.GalgeI;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
-import static rest.GameLogic.game;
-import static rest.Score.soapI;
 
 /**
  *

@@ -78,6 +78,7 @@ $(document).ready(function () {
                 document.getElementById("answer").innerHTML = string;
                 getSynligtOrd();
                 console.log(word);
+                console.log(response);
 
             },
             error: function (response) {
@@ -243,6 +244,7 @@ $(document).ready(function () {
         $.ajax({
             url: path + "/game/logstatus",
             method: 'GET',
+            dataType: "text",
             success: function (response) {
                 if (response == null) {
                 } else {

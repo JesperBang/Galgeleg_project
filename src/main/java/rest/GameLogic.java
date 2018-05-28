@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import jwtHandler.JWTHandler;
@@ -47,52 +48,52 @@ public class GameLogic {
     @Path("nulstil")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String Nulstil() throws MalformedURLException {
+    public Response Nulstil() throws MalformedURLException {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
         try {
             game.nulstil();
-            return "success";
+            return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
-            return "failed";
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            
         }
     }
 
     @Path("logstatus")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String Logstatus() throws MalformedURLException {
+    public Response Logstatus() throws MalformedURLException {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
         try {
             String response = game.logStatus();
-            return response;
+            return Response.ok(response, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return null;
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR ).entity("Entity not found: "+e.toString()).build();
         }
     }
 
     @Path("getordet")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String GetOrdet() throws MalformedURLException {
+    public Response GetOrdet() throws MalformedURLException {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
         try {
             String response = game.getOrdet();
-
-            return response;
+            return Response.ok(response, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return null;
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Entity not found:" +e.toString()).build();
         }
     }
 
     @Path("getbrugtebogstaver")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<String> GetBrugteBogstaver() throws MalformedURLException {
+    public Response GetBrugteBogstaver() throws MalformedURLException {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
@@ -100,39 +101,39 @@ public class GameLogic {
 
         try {
             bogstaver = game.getBrugteBogstaver();
-            return bogstaver;
+            return Response.ok(bogstaver, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return null;
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Entity not found:" +e.toString()).build();
         }
     }
 
     @Path("getsynligtord")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String GetSynligtOrd() throws MalformedURLException {
+    public Response GetSynligtOrd() throws MalformedURLException {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
         try {
             String response = game.getSynligtOrd();
-            return response;
+            return Response.ok(response, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return null;
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Entity not found:" +e.toString()).build();
         }
     }
 
     @Path("erspilletvundet")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean ErSpilletVundet() throws MalformedURLException {
+    public Response ErSpilletVundet() throws MalformedURLException {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
         try {
             Boolean response = game.erSpilletVundet();
-            return response;
+            return Response.ok(response, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return false;
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Entity not found:" +e.toString()).build();
         }
     }
 
