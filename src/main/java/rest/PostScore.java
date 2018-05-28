@@ -14,11 +14,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import jwtHandler.JWTHandler;
 import org.json.JSONObject;
 import jwtHandler.JWTHandler.AuthException;
+import org.json.JSONException;
 
 /**
  *
@@ -42,7 +44,7 @@ public class PostScore {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    public String PostScore(String scoredata){
+    public Response PostScore(String scoredata) {
         //Fetching input from JSON body
         JSONObject input = new JSONObject(scoredata);  
         
@@ -58,10 +60,19 @@ public class PostScore {
                 
             //requesting score creation with userDTO info
             soapI.createScore(user);
-
-            return "Score of "+input.getDouble("score")+" was posted for user "+input.getString("username");
-        } catch (Exception e) {
-            return "failed to post score with error\n\n"+e.toString();
+            
+              if(JWTHandler.validateToken(input.getString("jwt"))==null){
+            return Response.status(Response.Status.UNAUTHORIZED).entity( "failed to post score: Empty token.").build();
+          }
+            else
+                 return Response.status(Response.Status.CREATED).entity("Score of: " + input.getDouble("score") + " was posted for user" + input.getString("username")).build();
+        
+        } catch (AuthException ae) {
+           
+            return Response.status(Response.Status.UNAUTHORIZED).entity("failed to post score with error\n\n" + ae.toString()).build();
+        }
+        catch (JSONException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity("failed to post score with error\n\n" + e.toString()).build();
         }
     }
 }

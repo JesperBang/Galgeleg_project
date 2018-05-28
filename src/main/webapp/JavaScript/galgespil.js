@@ -288,6 +288,7 @@ function postscore() {
             
         },
         error: function(error) {
+            alert(resp.status +"! Authentication error.");
         }   
     });
     
