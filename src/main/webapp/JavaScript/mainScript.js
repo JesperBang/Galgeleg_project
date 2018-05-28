@@ -25,27 +25,14 @@ $(document).ready(function () {
             data: JSON.stringify(person),
             dataType: "json",
             success: function (resp) {
-
                 console.log(resp["jwt"]);
                 console.log(resp.valueOf(status));
-                if (resp == null) {
-                    alert("Wrong Credentials!");
-                    document.getElementById("loginBtn").disabled = false;
-                    document.getElementById("loginBtn").style.opacity = 01;
-                    document.getElementById("loginBtn").style.cursor = "pointer";
+                localStorage.setItem("user", resp["jwt"]); //session Storage						
+                location.href = 'index.html';
+                document.getElementById("loginBtn").disabled = false;
+                document.getElementById("loginBtn").style.opacity = 01;
+                document.getElementById("loginBtn").style.cursor = "pointer";
 
-                } else {
-                    console.log(resp);
-                    localStorage.setItem("user", resp["jwt"]); //session Storage						
-                    location.href = 'index.html';
-                    document.getElementById("loginBtn").disabled = false;
-                    document.getElementById("loginBtn").style.opacity = 01;
-                    document.getElementById("loginBtn").style.cursor = "pointer";
-                    //var name = $.parseJSON(window.atob(resp.split(".")[1]));
-                    //console.log(name);
-                    //console.log(name.UserDTO.firstname);		
-                    //document.getElementById("logoutmenu").innerHTML = "Logout - "+name.UserDTO.firstname;
-                }
             },
             error: function (resp) {
                 //Error handling...

@@ -36,7 +36,16 @@ public class Validate {
         try {
             if (header != null) {
                 JWTHandler.validateToken(header.split(" ")[1]);
-                return Response.status(Response.Status.OK).build();
+                            
+                String hyper = "{"
+                + " \"Links\":["
+                + "{ \"Rel\": \"score\","
+                + " \"href\": \"http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/score\","
+                + " \"Method\": \"GET\"}"
+                + "]"
+                + "}";
+            
+            return Response.ok(hyper, MediaType.APPLICATION_JSON).build();
             } else {
                 return Response.status(Response.Status.UNAUTHORIZED).build();
             }

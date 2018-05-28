@@ -17,34 +17,22 @@ function forgotPass(){
         contentType: 'application/json',
         data: JSON.stringify(student),
         success: function(response) {
-            var send = response.Valid;
-            // Login true
-            if (send === true){
+
             alert('Email sent to student email');
             location.href = 'loginPage.html'
-             document.getElementById("forgotBtn").disabled = false;
-             document.getElementById("forgotBtn").style.opacity = 01;
-             document.getElementById("forgotBtn").style.cursor = "pointer";
-            }
-            // Login false
-            else {
-                 document.getElementById("forgotBtn").disabled = false;
-                 document.getElementById("forgotBtn").style.opacity = 01;
-                 document.getElementById("forgotBtn").style.cursor = "pointer";
-                     alert('Wrong student ID');
-                     return false;
-            }
+            document.getElementById("forgotBtn").disabled = false;
+            document.getElementById("forgotBtn").style.opacity = 01;
+            document.getElementById("forgotBtn").style.cursor = "pointer";
+
         },
-        error: function(){
+        error: function(response){
              document.getElementById("forgotBtn").disabled = false;
              document.getElementById("forgotBtn").style.opacity = 01;
              document.getElementById("forgotBtn").style.cursor = "pointer";
-            alert("Error");
+            alert(response.status + "! Failed to send email.");
         }
     });
 
     return false;
-    document.getElementById("forgotBtn").disabled = false;
-    document.getElementById("forgotBtn").style.opacity = 01;
-    document.getElementById("forgotBtn").style.cursor = "pointer";
+
 }

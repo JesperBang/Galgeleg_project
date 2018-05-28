@@ -282,10 +282,11 @@ $(document).ready(function () {
             contentType: "application/json",
             method: 'POST',
             data: JSON.stringify(score),
-            dataType: "text",
+            dataType: "json",
 
             success: function (resp) {
-                alert(resp);
+                console.log(resp)
+                alert("Score of "+resp["score"]+" was posted for user "+resp["user"]);
             },
             error: function (error) {
                 alert(error);

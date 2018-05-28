@@ -61,8 +61,16 @@ public class PostScore {
 
             //requesting score creation with userDTO info
             soapI.createScore(user);
-
-            return Response.status(Response.Status.CREATED).entity("Score of " + input.getDouble("score") + " was posted for user " + input.getString("username")).build();
+                String hyper = "{"
+                + "\"score\": \""+input.getDouble("score")+"\","
+                + "\"user\": \""+input.getString("username")+"\","
+                + " \"Links\":["
+                + "{ \"Rel\": \"score\","
+                + " \"href\": \"http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/score\","
+                + " \"Method\": \"GET\"}"
+                + "]"
+                + "}";
+            return Response.status(Response.Status.CREATED).entity(hyper).build();
 
         } catch (AuthException ae) {
             if (JWTHandler.validateToken(input.getString("jwt")) == null) {
