@@ -25,33 +25,33 @@ import static rest.GameLogic.game;
  *
  * @author jespe
  */
-
 @Path("score")
 public class Score {
+
     static UserDAOSOAPI soapI;
     URL url;
     QName qname;
     Service service;
-        
+
     public Score() throws MalformedURLException {
         URL url = new URL("http://ec2-35-177-117-75.eu-west-2.compute.amazonaws.com:9915/SQL_Soap?wsdl");
         QName qname = new QName("http://database/", "SOAPImplService");
         Service service = Service.create(url, qname);
         soapI = service.getPort(UserDAOSOAPI.class);
     }
-     
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserDTO> ShowScores() {
-	List<UserDTO> allScores = null;
+        List<UserDTO> allScores = null;
 
-	try {
+        try {
             allScores = soapI.getStudentList();
             System.out.println(allScores);
         } catch (DALException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-	}
-            return allScores;
-	}
+        }
+        return allScores;
+    }
 }

@@ -8,13 +8,12 @@ import javax.ws.rs.Path;
 public class Test {
 
     @GET
-    public String GetTest(){
+    public String GetTest() {
         return "test";
     }
 
-
     @POST
-    public String PostTest(String s){
-        return s+"test";
+    public String PostTest(String s) {
+        return s + "test";
     }
 }

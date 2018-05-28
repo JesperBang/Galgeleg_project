@@ -26,15 +26,15 @@ import org.json.JSONObject;
  *
  * @author jespe
  */
-
 @Path("game")
 public class GameLogic {
-    @Context HttpServletRequest request;
-    static GalgeI game;
-        URL url;
-        QName qname;
-        Service service;
 
+    @Context
+    HttpServletRequest request;
+    static GalgeI game;
+    URL url;
+    QName qname;
+    Service service;
 
     public GameLogic() throws MalformedURLException {
         //this.url = new URL("http://localhost:9913/galgeleg?wsdl");
@@ -43,14 +43,14 @@ public class GameLogic {
         this.service = Service.create(url, qname);
         game = service.getPort(GalgeI.class);
     }
-    
+
     @Path("nulstil")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String Nulstil() throws MalformedURLException{
+    public String Nulstil() throws MalformedURLException {
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
-        
+        System.out.println("header: " + header);
+
         try {
             game.nulstil();
             return "success";
@@ -58,13 +58,13 @@ public class GameLogic {
             return "failed";
         }
     }
-    
+
     @Path("logstatus")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String Logstatus() throws MalformedURLException{
+    public String Logstatus() throws MalformedURLException {
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
+        System.out.println("header: " + header);
         try {
             String response = game.logStatus();
             return response;
@@ -72,33 +72,32 @@ public class GameLogic {
             return null;
         }
     }
-    
+
     @Path("getordet")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String GetOrdet() throws MalformedURLException{
+    public String GetOrdet() throws MalformedURLException {
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
-        
+        System.out.println("header: " + header);
+
         try {
             String response = game.getOrdet();
-            
+
             return response;
         } catch (Exception e) {
             return null;
         }
     }
-    
+
     @Path("getbrugtebogstaver")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<String> GetBrugteBogstaver() throws MalformedURLException{
+    public ArrayList<String> GetBrugteBogstaver() throws MalformedURLException {
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
-        
+        System.out.println("header: " + header);
+
         ArrayList<String> bogstaver = null;
-        
-    
+
         try {
             bogstaver = game.getBrugteBogstaver();
             return bogstaver;
@@ -106,14 +105,14 @@ public class GameLogic {
             return null;
         }
     }
-    
+
     @Path("getsynligtord")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String GetSynligtOrd() throws MalformedURLException{
+    public String GetSynligtOrd() throws MalformedURLException {
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
-        
+        System.out.println("header: " + header);
+
         try {
             String response = game.getSynligtOrd();
             return response;
@@ -121,14 +120,14 @@ public class GameLogic {
             return null;
         }
     }
-    
+
     @Path("erspilletvundet")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean ErSpilletVundet() throws MalformedURLException{
+    public Boolean ErSpilletVundet() throws MalformedURLException {
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
-        
+        System.out.println("header: " + header);
+
         try {
             Boolean response = game.erSpilletVundet();
             return response;
@@ -136,14 +135,14 @@ public class GameLogic {
             return false;
         }
     }
-    
+
     @Path("erspillettabt")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean ErSpilletTabt() throws MalformedURLException{
+    public Boolean ErSpilletTabt() throws MalformedURLException {
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
-        
+        System.out.println("header: " + header);
+
         try {
             Boolean response = game.erSpilletTabt();
             return response;
@@ -151,16 +150,15 @@ public class GameLogic {
             return false;
         }
     }
-    
+
     @Path("gaetbogstav")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String GaetBogstav(String guess) throws MalformedURLException{
+    public String GaetBogstav(String guess) throws MalformedURLException {
         JSONObject input = new JSONObject(guess);
         String header = request.getHeader("Authorization");
-        System.out.println("header: "+header);
-        
-        
+        System.out.println("header: " + header);
+
         try {
             game.gætBogstav(input.getString("bogstav"));
             return "Success";
@@ -168,5 +166,5 @@ public class GameLogic {
             return null;
         }
     }
-    
+
 }

@@ -28,13 +28,14 @@ import org.json.JSONException;
  */
 @Path("postscore")
 public class PostScore {
+
     static UserDAOSOAPI soapI;
     URL url;
     QName qname;
     Service service;
     Validate val = new Validate();
     UserDTO user = new UserDTO();
-        
+
     public PostScore() throws MalformedURLException {
         URL url = new URL("http://ec2-35-177-117-75.eu-west-2.compute.amazonaws.com:9915/SQL_Soap?wsdl");
         QName qname = new QName("http://database/", "SOAPImplService");
@@ -46,8 +47,8 @@ public class PostScore {
     @Produces(MediaType.APPLICATION_JSON)
     public Response PostScore(String scoredata) throws AuthException {
         //Fetching input from JSON body
-        JSONObject input = new JSONObject(scoredata);  
-        
+        JSONObject input = new JSONObject(scoredata);
+
         //Validating and posting
         try {
             JWTHandler.validateToken(input.getString("jwt"));
@@ -57,22 +58,19 @@ public class PostScore {
             user.setScore(input.getDouble("score"));
             user.setNumber_of_tries(input.getInt("numtries"));
             user.setTime_used(input.getDouble("time"));
-                
+
             //requesting score creation with userDTO info
             soapI.createScore(user);
-            
 
-                 return Response.status(Response.Status.CREATED).entity("Score of " + input.getDouble("score") + " was posted for user " + input.getString("username")).build();
+            return Response.status(Response.Status.CREATED).entity("Score of " + input.getDouble("score") + " was posted for user " + input.getString("username")).build();
 
-        
         } catch (AuthException ae) {
-                         if(JWTHandler.validateToken(input.getString("jwt"))==null){
-            return Response.status(Response.Status.UNAUTHORIZED).entity( "failed to post score: Empty token.").build();
-          }
-                         else
-            return Response.status(Response.Status.UNAUTHORIZED).entity("failed to post score with error\n\n" + ae.toString()).build();
-        }
-        catch (JSONException e){
+            if (JWTHandler.validateToken(input.getString("jwt")) == null) {
+                return Response.status(Response.Status.UNAUTHORIZED).entity("failed to post score: Empty token.").build();
+            } else {
+                return Response.status(Response.Status.UNAUTHORIZED).entity("failed to post score with error\n\n" + ae.toString()).build();
+            }
+        } catch (JSONException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("failed to post score with error\n\n" + e.toString()).build();
         }
     }

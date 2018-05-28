@@ -1,6 +1,5 @@
 package rest;
 
-
 import brugerautorisation.transport.rmi.Brugeradmin;
 import java.net.MalformedURLException;
 import org.json.JSONObject;
@@ -10,7 +9,6 @@ import javax.ws.rs.Produces;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import org.json.JSONException;
 
 @Path("email")
 public class email {
@@ -25,7 +23,7 @@ public class email {
 
         try {
             ba = (Brugeradmin) Naming.lookup("rmi://javabog.dk/brugeradmin");
-        } catch (MalformedURLException | NotBoundException | RemoteException e){
+        } catch (MalformedURLException | NotBoundException | RemoteException e) {
         }
 
         JSONObject valid = new JSONObject();
@@ -37,7 +35,7 @@ public class email {
             //e.printStackTrace();
             valid.put("Valid", false);
         }
-        
+
         return valid.toString();
     }
 }

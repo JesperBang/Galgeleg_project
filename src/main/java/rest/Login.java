@@ -28,32 +28,33 @@ public class Login {
         UserDTO user = new UserDTO();
         Brugeradmin ba = null;
         Bruger b;
-        
+
         String uname = userinfo.getString("username"), upass = userinfo.getString("password");
 
         try {
             ba = (Brugeradmin) Naming.lookup("rmi://javabog.dk/brugeradmin");
-        } catch (MalformedURLException | NotBoundException | RemoteException e){}
+        } catch (MalformedURLException | NotBoundException | RemoteException e) {
+        }
 
         try {
-            b=ba.hentBruger(uname, upass);
-            if(b.brugernavn.equals(uname) && b.adgangskode.equals(upass)){
-              System.out.println("LOGGING IN");
-              System.out.println(uname+" "+upass);
+            b = ba.hentBruger(uname, upass);
+            if (b.brugernavn.equals(uname) && b.adgangskode.equals(upass)) {
+                System.out.println("LOGGING IN");
+                System.out.println(uname + " " + upass);
 
-              user.setStudentID(uname);
-              System.out.println(user);
-              
-              String json = JWTHandler.generateJwtToken(user);
-              return Response.ok(json, MediaType.APPLICATION_JSON).build(); 
-            }else{ 
+                user.setStudentID(uname);
+                System.out.println(user);
+
+                String json = JWTHandler.generateJwtToken(user);
+                return Response.ok(json, MediaType.APPLICATION_JSON).build();
+            } else {
                 return Response.status(Response.Status.UNAUTHORIZED).entity("Bad credentials for user: " + uname).build();
             }
-            
+
         } catch (Exception e) {
-           
+
             System.out.println("Error logging in with: 401");
             return Response.status(Response.Status.UNAUTHORIZED).entity("Bad credentials for user: " + uname).build();
-        } 
+        }
     }
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package rest;
+
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -21,6 +22,7 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import static rest.GameLogic.game;
 import static rest.Score.soapI;
+
 /**
  *
  * @author s143775
@@ -28,32 +30,32 @@ import static rest.Score.soapI;
 
 @Path("student")
 public class Student {
-      static UserDAOSOAPI soapI;
+
+    static UserDAOSOAPI soapI;
     URL url;
     QName qname;
     Service service;
-    
-        
-       public Student() throws MalformedURLException {
+
+    public Student() throws MalformedURLException {
         URL url = new URL("http://ec2-35-177-117-75.eu-west-2.compute.amazonaws.com:9915/SQL_Soap?wsdl");
         QName qname = new QName("http://database/", "SOAPImplService");
         Service service = Service.create(url, qname);
         soapI = service.getPort(UserDAOSOAPI.class);
     }
-    
+
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserDTO> ShowStudents(@PathParam("id") String id) {
-	List<UserDTO> allStudents = null;
+        List<UserDTO> allStudents = null;
 
-	try {
+        try {
             allStudents = soapI.getStudent(id);
             System.out.println(allStudents);
         } catch (DALException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-	}
-            return allStudents;
-	}
+        }
+        return allStudents;
+    }
 }
