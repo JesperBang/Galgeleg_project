@@ -8,19 +8,27 @@ and open the template in the editor.
     <head>
         <title>Galgespillet</title>
         <meta charset="UTF-8">
+            <link href="CSS/galgespil.css" rel="stylesheet" type="text/css"/>
+            <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
         <script src="JavaScript/galgespil.js"></script>
 
     </head>
-    <body onload="start()">
-        <h1>Velkommen til Galgespillet!</h1>
-        <h2 id="infotext">Gæt ordet for at vinde!</h2>
+    
+    <body onload="start()" class="body">
+
+        <h1 align="middle">Velkommen til Galgespillet! </h1>
+        <h2 align="middle" id="infotext">Gæt ordet for at vinde!</h2>
 
 
         <!--<img id="image" src="images/forkert0-web.png" alt="Galge0" height="100" width="100"> -->
-        <img id="image" src="images/forkert1-web.png" height="100" width="100">
-        <input id="letter" onfocus="this.value=''" type="text">
+        <div class="imagediv" align="middle">
+        <img id="image" src="images/forkert1-web.png" height="400" width="400" class="image">
+        </div>
+        
+        <div class="inputdiv" align="middle">
+        <input id="letter" onfocus="this.value=''" type="text" class="letter">
 
         <p id="answer"></p>
         <p id="counter"></p>
@@ -29,9 +37,8 @@ and open the template in the editor.
         <h4>Liv:</h4><p id="livesLeft"></p>
 
 
-        <input type="button" value="Hent ord" onClick="getOrdet()"/>
-        <input type="button" value="Gæt!" onclick="gætBogstav()"/>
-
-        <div></div>
+        <input type="button" class="w3-button w3-white w3-border w3-border-grey w3-round-large" value="Hent ord" onClick="getOrdet()"/>
+        <input type="button" class="w3-button w3-white w3-border w3-border-grey w3-round-large" value="Gæt!" onclick="gætBogstav()"/>
+        </div>
     </body>
 </html>

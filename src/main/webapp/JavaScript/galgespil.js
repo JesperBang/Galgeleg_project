@@ -64,6 +64,7 @@ function gætBogstav() {
             }else {
                 console.log("Guess incorrect");
                 lives = lives - 1;
+                
             }
             
             console.log(lives);
