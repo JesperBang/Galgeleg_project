@@ -16,15 +16,17 @@ var letter;
 var correctLetters;
 var timeSpent;
 var word;
+var wrongs = 0;
 
-function start(){
-  
-    nulstil(); 
+
+function start(){ 
     document.getElementById("livesLeft").innerHTML = lives;
+    getOrdet();
 }
 
 
 function getOrdet() {
+    nulstil();
     
     document.getElementById("infotext").textContent = "Gæt ordet for at vinde!";
     usedLetters.length = 0;
@@ -42,7 +44,6 @@ function getOrdet() {
             string = answers.join(" ");
             document.getElementById("answer").innerHTML = string;
             getSynligtOrd();
-            
              
          },
          error: function(response) {
@@ -58,17 +59,7 @@ function gætBogstav() {
     var bogstav = {
         "bogstav": document.getElementById("letter").value
     };
-    
-        if(word.includes(document.getElementById("letter").value)) {
-                console.log("Guess correct");
-            }else {
-                console.log("Guess incorrect");
-                lives = lives - 1;
-                
-            }
-            
-            console.log(lives);
-            document.getElementById("livesLeft").innerHTML = lives;
+           
     
     $.ajax({
         url: path+"/gaetbogstav",
@@ -80,7 +71,6 @@ function gætBogstav() {
             if(resp == null){
                 
             }else{
-                console.log(resp); 
 
                 getSynligtOrd();
                 erSpilletTabt();
@@ -95,7 +85,6 @@ function gætBogstav() {
         
         
     });
-    updateImage();
     
     return false;
 }
@@ -126,9 +115,12 @@ function nulstil() {
         url: path+"/nulstil",
         method: 'GET',
         success: function(response){
+            document.getElementById("image").src="images/forkert1-web.png";
+            document.getElementById("gætord").disabled=false;
+            alert("hejhejhej");
         },
         error: function(error){
-            
+            console.log(error);
         }
         
     });
@@ -185,7 +177,7 @@ function erSpilletTabt(){
         dataType: "",
         success: function(status){
             if (status === true) {
-                console.log('Desværre, du har tabt!');
+                document.getElementById("gætord").disabled = true;
                 document.getElementById("infotext").textContent = "Desværre! Du tabte spillet! Hent et nyt ord for at spille igen!";
                 
             }
@@ -205,11 +197,26 @@ function logStatus() {
         url: path+"/logstatus",
         method: 'GET',
         success: function(response){
+            if(response==null){}
+            else{
             console.log(response);
-            
-            
-            
-        },
+              var WrongLetters = response;
+              var tmp;
+              tmp = WrongLetters.split(":");
+               var tmp1 = tmp[2].split("B");
+               var numwrongs = tmp1[0].split(" ");
+               wrongs = numwrongs[1];
+               wrongs.replace("\n", "");
+               wrongs.replace(" ", "");
+               wrongs.replace("\t", "");
+               wrongs = parseInt(wrongs.trim());
+               console.log(wrongs);
+               
+            lives = 6 - wrongs;
+             document.getElementById("livesLeft").innerHTML = lives;
+            updateImage();
+        }
+    },
         error: function(error){
             
         }
@@ -222,25 +229,25 @@ function updateImage() {
     
     switch(lives) {
 
-        case 1:
+        case 0:
             document.getElementById("image").src="images/forkert6-web.png";
             break;
-        case 2:
+        case 1:
             document.getElementById("image").src="images/forkert5-web.png";
             break;
-        case 3:
+        case 2:
             document.getElementById("image").src="images/forkert4-web.png";
             break;
-        case 4:
+        case 3:
             document.getElementById("image").src="images/forkert3-web.png";
             break;
-        case 5:
+        case 4:
             document.getElementById("image").src="images/forkert2-web.png";
             break;
-        case 6:
+        case 5:
             document.getElementById("image").src="images/forkert1-web.png";
             break;
-        case 7:
+        case 6:
             document.getElementById("image").src="images/forkert0-web.png";
         break;
         

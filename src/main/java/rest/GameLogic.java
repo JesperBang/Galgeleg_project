@@ -65,7 +65,6 @@ public class GameLogic {
     public String Logstatus() throws MalformedURLException{
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
-        
         try {
             String response = game.logStatus();
             return response;
