@@ -18,7 +18,6 @@
             "password":document.getElementById("pswField").value
         };
         
-        
 	$.ajax({	
             url: path+"/login",
             contentType: "application/json",

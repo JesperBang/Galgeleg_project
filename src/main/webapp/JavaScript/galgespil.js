@@ -17,6 +17,7 @@ var correctLetters;
 var timeSpent;
 var word;
 var wrongs = 0;
+var tStart, tSnd,tDelta;
 
 
 function start(){ 
@@ -29,7 +30,7 @@ function start(){
 function getOrdet() {
     nulstil();
     updateImage();
-
+  
     document.getElementById("infotext").textContent = "Gæt ordet for at vinde!";
     usedLetters.length = 0;
     document.getElementById("usedLetters").innerHTML = usedLetters;
@@ -165,7 +166,9 @@ function erSpilletVundet(){
         success: function(status){
             if (status === true) {
                 console.log('Tillykke, du har vundet!');
+                document.getElementById("gætord").disabled = true;
                 document.getElementById("infotext").textContent = "Tillykke! Du vandt spillet! Hent et nyt ord for at spille igen!";
+                
             }
         },
         error: function(error){
@@ -232,6 +235,32 @@ function logStatus() {
     
 }
 
+function postscore() {
+    
+    var score = {
+        "jwt": localStorage.getItem("user"),
+        "username": $.parseJSON(window.atob(localStorage.getItem("user").split(".")[1])).UserDTO.student_Id,
+        "score": "",
+        "numtries":wrongs,
+        "time":""
+    };
+           
+    
+    $.ajax({
+        url: path+"/postscore",
+        contentType: "application/json",
+        method: 'POST',
+        data: JSON.stringify(score),
+        dataType: "application/json",
+        success: function(resp){
+            
+        },
+        error: function(error) {
+        }   
+    });
+    
+    return false;
+}
 
 function updateImage() {
     
@@ -261,7 +290,19 @@ function updateImage() {
         
     }
     
-    
+        function getScore(){
+        //Grabbing time and converting to seconds.
+        tEnd = System.currentTimeMillis();
+        tDelta = tEnd- tStart;
+        elapsedSeconds = tDelta / 1000.0;
+
+        //Random "algorithm" i came up with
+        //to calculate score relative to word length,
+        //time spend and amount of misses.
+        temp1 = elapsedSeconds*(numofguess+1);
+        temp2 = temp1/(wordunderscore.length()+1);
+        temp3 = (100/temp2)*100;
+    }
     
     
 }
