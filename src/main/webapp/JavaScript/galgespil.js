@@ -221,7 +221,7 @@ function logStatus() {
 function updateImage() {
     
     switch(lives) {
-        
+
         case 1:
             document.getElementById("image").src="images/forkert6-web.png";
             break;
@@ -240,6 +240,9 @@ function updateImage() {
         case 6:
             document.getElementById("image").src="images/forkert1-web.png";
             break;
+        case 7:
+            document.getElementById("image").src="images/forkert0-web.png";
+        break;
         
     }
     

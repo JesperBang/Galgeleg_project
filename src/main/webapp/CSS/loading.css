@@ -34,3 +34,18 @@ and open the template in the editor.
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+button {
+    display: inline-block;
+    height: 73px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    width: 64px;
+}
+
+#testprint img {
+    display: block;
+    height: 70px;  
+    width: 60px;
+}
