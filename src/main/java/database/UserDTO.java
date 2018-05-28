@@ -12,7 +12,7 @@ import java.util.List;
 public class UserDTO {
     private static final long serialVersionUID = -7272979590540794430L;
  
-	public String student_Id, href = "http://localhost:8084/mavenproject1/rest/score";                     
+	public String student_Id, href = "http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/score";                     
 	
 	int number_of_tries; 
 	

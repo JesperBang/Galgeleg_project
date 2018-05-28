@@ -5,7 +5,8 @@ $(document).ready(function() {
 
 });
 //var path = 'http://ubuntu4.saluton.dk:20002/mavenproject1/rest/game';
-var path = 'http://localhost:8084/mavenproject1/rest/game';
+//var path = 'http://localhost:8084/mavenproject1/rest/game';
+var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/game';
                 
 var string;
 var lives = 6;
@@ -78,7 +79,7 @@ function gætBogstav() {
         data: JSON.stringify(bogstav),
         dataType: "text",
         success: function(bogstav){
-            $.post("http://ubuntu4.saluton.dk:20002/Galgeleg/rest/game/gaetbogstav", bogstav);
+            $.post("http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/game/gaetbogstav", bogstav);
             console.log(bogstav); 
             
             getSynligtOrd();
