@@ -31,7 +31,6 @@ var tStart, tSnd, tDelta, elapsedSeconds, temp1, temp2, temp3;
         temp1 = elapsedSeconds*(usedLetters.length+1);
         temp2 = temp1/(word.length+1);
         temp3 = (100/temp2)*100;
-        console.log(temp3);
     }
 
 start();
@@ -45,7 +44,7 @@ function start(){
 function fn60sec() {
     getScore();
 }
-fn60sec();
+
 setInterval(fn60sec, 1*1000);
 
 
@@ -201,7 +200,7 @@ function erSpilletVundet(){
                 console.log('Tillykke, du har vundet!');
                 document.getElementById("gætord").disabled = true;
                 document.getElementById("infotext").textContent = "Tillykke! Du vandt spillet! Hent et nyt ord for at spille igen!";
-                
+                postscore();
             }
         },
         error: function(error){
@@ -273,9 +272,9 @@ function postscore() {
     var score = {
         "jwt": localStorage.getItem("user"),
         "username": $.parseJSON(window.atob(localStorage.getItem("user").split(".")[1])).UserDTO.student_Id,
-        "score": "",
+        "score": temp3,
         "numtries":wrongs,
-        "time":""
+        "time":elapsedSeconds,
     };
            
     
