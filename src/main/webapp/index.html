@@ -62,7 +62,7 @@
              console.log(resp);
             if(resp == false){
                 if (confirm('You are not logged in so your highscore will not be saved. \n Do you want to log in now?')) {
-                    setframe("loginPage.html");
+                    location.href = 'loginPage.html';
                 }else{
                     setframe("galgespil.html");
                 }

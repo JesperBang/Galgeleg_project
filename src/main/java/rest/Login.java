@@ -11,6 +11,10 @@ import javax.ws.rs.Produces;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import javax.persistence.Entity;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import jwtHandler.JWTHandler;
 
 @Path("login")
@@ -19,7 +23,7 @@ public class Login {
 //Validate the user login information
     @POST
     @Produces("application/json")
-    public String login(String loginInfo) throws java.rmi.RemoteException {
+    public Response login(String loginInfo) throws java.rmi.RemoteException {
         JSONObject userinfo = new JSONObject(loginInfo);
         UserDTO user = new UserDTO();
         Brugeradmin ba = null;
@@ -39,14 +43,17 @@ public class Login {
 
               user.setStudentID(uname);
               System.out.println(user);
-
-              return JWTHandler.generateJwtToken(user);
-            }else{ return null; }
+              
+              String json = JWTHandler.generateJwtToken(user);
+              return Response.ok(json, MediaType.APPLICATION_JSON).build(); 
+            }else{ 
+                return Response.status(Response.Status.UNAUTHORIZED).entity("Bad credentials for user: " + uname).build();
+            }
             
         } catch (Exception e) {
-            System.out.println("Error logging in with: ");
-            e.printStackTrace();
-            return null;
+           
+            System.out.println("Error logging in with: 401");
+            return Response.status(Response.Status.UNAUTHORIZED).entity("Bad credentials for user: " + uname).build();
         } 
     }
 }

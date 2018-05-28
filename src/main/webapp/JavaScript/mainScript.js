@@ -25,7 +25,9 @@
             data: JSON.stringify(person),
             dataType: "text",
             success: function(resp) {
-		if (resp == null ) {
+                console.log(resp);
+                console.log(resp.valueOf(status));
+		if (resp == null) {
                     alert("Wrong Credentials!");
                     	document.getElementById("loginBtn").disabled = false;
                         document.getElementById("loginBtn").style.opacity = 01;
@@ -34,7 +36,7 @@
 		} else {
                     console.log(resp);	
                     localStorage.setItem("user", resp); //session Storage						
-                    location.href = 'highscorelist.html';
+                    location.href = 'index.html';
                     document.getElementById("loginBtn").disabled = false;
                     document.getElementById("loginBtn").style.opacity = 01;
                     document.getElementById("loginBtn").style.cursor = "pointer";
@@ -47,7 +49,11 @@
             error: function(resp) {
                 //Error handling...
 		console.log(resp);
-                
+                console.log(resp.status);
+                alert(resp.status+"! Wrong credentials");
+                document.getElementById("loginBtn").disabled = false;
+                document.getElementById("loginBtn").style.opacity = 01;
+                document.getElementById("loginBtn").style.cursor = "pointer";
             }	
 	});
         return false;
