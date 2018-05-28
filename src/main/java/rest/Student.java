@@ -35,7 +35,7 @@ public class Student {
     
         
        public Student() throws MalformedURLException {
-        URL url = new URL("http://localhost:9915/SQL_Soap?wsdl");
+        URL url = new URL("http://ec2-35-177-117-75.eu-west-2.compute.amazonaws.com:9915/SQL_Soap?wsdl");
         QName qname = new QName("http://database/", "SOAPImplService");
         Service service = Service.create(url, qname);
         soapI = service.getPort(UserDAOSOAPI.class);
