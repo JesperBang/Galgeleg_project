@@ -10,18 +10,21 @@ and open the template in the editor.
         <meta charset="UTF-8">
             <link href="CSS/galgespil.css" rel="stylesheet" type="text/css"/>
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+            <link rel="stylesheet" href="CSS/animate.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
         <script src="JavaScript/galgespil.js"></script>
 
+
     </head>
     
-    <body onload="start()" class="body">
-
+    <body onload="start()" class="body" >
+        <div class="animated slideInRight">
         <h1 align="middle">Velkommen til Galgespillet! </h1>
         <h2 align="middle" id="infotext">Gæt ordet for at vinde!</h2>
+        </div>
 
-
+        <div class="animated slideInUp">
         <!--<img id="image" src="images/forkert0-web.png" alt="Galge0" height="100" width="100"> -->
         <div class="imagediv" align="middle">
         <img id="image" src="images/forkert0-web.png" height="400" width="400" class="image">
@@ -39,6 +42,7 @@ and open the template in the editor.
 
         <input type="button" class="w3-button w3-white w3-border w3-border-grey w3-round-large" value="Hent ord" onClick="getOrdet()"/>
         <input type="button" id="gætord" class="w3-button w3-white w3-border w3-border-grey w3-round-large" value="Gæt!" onclick="gætBogstav()"/>
+        </div>
         </div>
     </body>
 </html>

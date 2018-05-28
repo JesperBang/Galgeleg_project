@@ -72,7 +72,7 @@ document.getElementById("testprint").addEventListener("click", function prinths(
         url: path+"/score",
         method: "GET",
         success: function(resp){
-            console.log(resp);
+            
             Print(resp)
         },		
         //error function

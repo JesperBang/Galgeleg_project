@@ -22,12 +22,14 @@ var wrongs = 0;
 function start(){ 
     document.getElementById("livesLeft").innerHTML = lives;
     getOrdet();
+
 }
 
 
 function getOrdet() {
     nulstil();
-    
+    updateImage();
+
     document.getElementById("infotext").textContent = "Gæt ordet for at vinde!";
     usedLetters.length = 0;
     document.getElementById("usedLetters").innerHTML = usedLetters;
@@ -114,10 +116,16 @@ function nulstil() {
     $.ajax({
         url: path+"/nulstil",
         method: 'GET',
+        dataType: 'text',
         success: function(response){
-            document.getElementById("image").src="images/forkert1-web.png";
-            document.getElementById("gætord").disabled=false;
-            alert("hejhejhej");
+            if(response == null){
+                alert("null")
+            }else{
+                document.getElementById("image").src="images/forkert1-web.png";
+                document.getElementById("gætord").disabled=false;
+                lives = 6;
+                updateImage();
+        }
         },
         error: function(error){
             console.log(error);
