@@ -36,9 +36,9 @@ function populateTable() {
 	$('<tr>').append(
             $('<th>').text("Placement"),
             $('<th>').text("User ID"),
-            $('<th>').text("number_of_tries"),
-            $('<th>').text("time_used"),
-            $('<th>').text("score")
+            $('<th>').text("Number of tries"),
+            $('<th>').text("Time used"),
+            $('<th>').text("Score")
 	).appendTo("#scoretable");
 				
 	//Loop through users and append them to the table in html
