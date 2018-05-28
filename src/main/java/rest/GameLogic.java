@@ -157,9 +157,10 @@ public class GameLogic {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public String GaetBogstav(String guess) throws MalformedURLException{
+        JSONObject input = new JSONObject(guess);
         String header = request.getHeader("Authorization");
         System.out.println("header: "+header);
-        JSONObject input = new JSONObject(guess);
+        
         
         try {
             game.gætBogstav(input.getString("bogstav"));

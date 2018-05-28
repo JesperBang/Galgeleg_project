@@ -5,8 +5,8 @@ $(document).ready(function() {
 
 });
 //var path = 'http://ubuntu4.saluton.dk:20002/mavenproject1/rest/game';
-//var path = 'http://localhost:8084/mavenproject1/rest/game';
-var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/game';
+var path = 'http://localhost:8084/mavenproject1/rest/game';
+//var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/game';
                 
 var string;
 var lives = 6;
@@ -27,7 +27,6 @@ function start(){
 function getOrdet() {
     
     document.getElementById("infotext").textContent = "Gæt ordet for at vinde!";
-    nulstil();
     usedLetters.length = 0;
     document.getElementById("usedLetters").innerHTML = usedLetters;
    
@@ -58,7 +57,6 @@ function gætBogstav() {
     
     var bogstav = {
         "bogstav": document.getElementById("letter").value
-        
     };
     
         if(word.includes(document.getElementById("letter").value)) {
@@ -73,22 +71,22 @@ function gætBogstav() {
     
     $.ajax({
         url: path+"/gaetbogstav",
-        crossDomain: 'true',
         contentType: "application/json",
         method: 'POST',
         data: JSON.stringify(bogstav),
         dataType: "text",
-        success: function(bogstav){
-            $.post("http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/game/gaetbogstav", bogstav);
-            console.log(bogstav); 
-            
-            getSynligtOrd();
-            erSpilletTabt();
-            erSpilletVundet();
-            getBrugteBogstaver();
-            logStatus();
+        success: function(resp){
+            if(resp == null){
+                
+            }else{
+                console.log(resp); 
 
-            
+                getSynligtOrd();
+                erSpilletTabt();
+                erSpilletVundet();
+                getBrugteBogstaver();
+                logStatus();
+            }
         },
         error: function(error) {
             
@@ -96,9 +94,9 @@ function gætBogstav() {
         
         
     });
-    return false;
-    
     updateImage();
+    
+    return false;
 }
 
 function getBrugteBogstaver() {
@@ -224,22 +222,22 @@ function updateImage() {
     switch(lives) {
         
         case 1:
-            lives = document.getElementById("image").src="images/forkert6-web.png";
+            document.getElementById("image").src="images/forkert6-web.png";
             break;
         case 2:
-            lives = document.getElementById("image").src="images/forkert5-web.png";
+            document.getElementById("image").src="images/forkert5-web.png";
             break;
         case 3:
-            lives = document.getElementById("image").src="images/forkert4-web.png";
+            document.getElementById("image").src="images/forkert4-web.png";
             break;
         case 4:
-            lives = document.getElementById("image").src="images/forkert3-web.png";
+            document.getElementById("image").src="images/forkert3-web.png";
             break;
         case 5:
-            lives = document.getElementById("image").src="images/forkert2-web.png";
+            document.getElementById("image").src="images/forkert2-web.png";
             break;
         case 6:
-            lives = document.getElementById("image").src="images/forkert1-web.png";
+            document.getElementById("image").src="images/forkert1-web.png";
             break;
         
     }

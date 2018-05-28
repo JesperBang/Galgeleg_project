@@ -11,27 +11,27 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
         <script src="JavaScript/galgespil.js"></script>
-        
+
     </head>
     <body onload="start()">
         <h1>Velkommen til Galgespillet!</h1>
         <h2 id="infotext">Gæt ordet for at vinde!</h2>
-        
-        
+
+
         <!--<img id="image" src="images/forkert0-web.png" alt="Galge0" height="100" width="100"> -->
-        <img id="image" height="100" width="100">
+        <img id="image" src="images/forkert1-web.png" height="100" width="100">
         <input id="letter" onfocus="this.value=''" type="text">
-        
+
         <p id="answer"></p>
         <p id="counter"></p>
         <p id="status"></p>
         <h4>Brugte bogstaver:</h4><p id="usedLetters"></p>
         <h4>Liv:</h4><p id="livesLeft"></p>
-        
-        
+
+
         <input type="button" value="Hent ord" onClick="getOrdet()"/>
         <input type="button" value="Gæt!" onclick="gætBogstav()"/>
-        
+
         <div></div>
     </body>
 </html>
