@@ -35,7 +35,7 @@
 		} else {
                     console.log(resp);	
                     localStorage.setItem("user", resp); //session Storage						
-                    location.href = 'index.html';
+                    location.href = 'highscorelist.html';
                     document.getElementById("loginBtn").disabled = false;
                     document.getElementById("loginBtn").style.opacity = 01;
                     document.getElementById("loginBtn").style.cursor = "pointer";
