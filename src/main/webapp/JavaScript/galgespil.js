@@ -3,7 +3,7 @@ $(document).ready(function() {
 	    jqxhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user"))
 	});
 
-});
+
 //var path = 'http://ubuntu4.saluton.dk:20002/mavenproject1/rest/game';
 var path = 'http://localhost:8084/mavenproject1/rest';
 //var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/game';
@@ -15,11 +15,26 @@ var usedLetters = [];
 var letter;
 var correctLetters;
 var timeSpent;
-var word;
+var word = "";
 var wrongs = 0;
-var tStart, tSnd,tDelta;
+var tStart, tSnd, tDelta, elapsedSeconds, temp1, temp2, temp3;
 
+        function getScore(){
+        //Grabbing time and converting to seconds.
+        tEnd = new Date().getTime();
+        tDelta = tEnd- tStart;
+        elapsedSeconds = tDelta / 1000.0;
 
+        //Random "algorithm" i came up with
+        //to calculate score relative to word length,
+        //time spend and amount of misses.
+        temp1 = elapsedSeconds*(usedLetters.length+1);
+        temp2 = temp1/(word.length+1);
+        temp3 = (100/temp2)*100;
+        console.log(temp3);
+    }
+
+start();
 function start(){ 
  
     document.getElementById("livesLeft").innerHTML = lives;
@@ -27,10 +42,27 @@ function start(){
 
 }
 
+function fn60sec() {
+    getScore();
+}
+fn60sec();
+setInterval(fn60sec, 1*1000);
+
+
+document.getElementById("gætord").addEventListener("click", function(){
+    gætBogstav();
+});
+document.getElementById("getord").addEventListener("click", function(){
+    getOrdet();
+});
+
 function getOrdet() {
     nulstil();
     updateImage();
   
+    tStart = new Date().getTime();
+    fn60sec();
+    
     document.getElementById("infotext").textContent = "Gæt ordet for at vinde!";
     usedLetters.length = 0;
     document.getElementById("usedLetters").innerHTML = usedLetters;
@@ -126,6 +158,7 @@ function nulstil() {
                 document.getElementById("gætord").disabled=false;
                 lives = 6;
                 updateImage();
+
         }
         },
         error: function(error){
@@ -289,21 +322,9 @@ function updateImage() {
         break;
         
     }
-    
-        function getScore(){
-        //Grabbing time and converting to seconds.
-        tEnd = System.currentTimeMillis();
-        tDelta = tEnd- tStart;
-        elapsedSeconds = tDelta / 1000.0;
+ 
 
-        //Random "algorithm" i came up with
-        //to calculate score relative to word length,
-        //time spend and amount of misses.
-        temp1 = elapsedSeconds*(numofguess+1);
-        temp2 = temp1/(wordunderscore.length()+1);
-        temp3 = (100/temp2)*100;
-    }
     
     
 }
-
+});
