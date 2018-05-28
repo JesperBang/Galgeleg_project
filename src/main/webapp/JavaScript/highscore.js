@@ -65,4 +65,52 @@ function populateTable() {
   
     return false;		
 }
+
+document.getElementById("testprint").addEventListener("click", function prinths() {
+
+    $.ajax({
+        url: path+"/score",
+        method: "GET",
+        success: function(resp){
+            console.log(resp);
+            Print(resp)
+        },		
+        //error function
+        error: function(error){
+            alert("Error, timed out");
+        }
+    });
+    return false;		
+}
+    );
+function Print(resp){
+		var currentdate = new Date(); 
+		var datetime =  currentdate.getDate() + "-"
+		                + (currentdate.getMonth()+1)  + "-" 
+		                + currentdate.getYear() ;
+		
+		var HSP = "Udskrevet "+datetime;
+		HSP += "<br><br>";
+		HSP += "<table style=\"width:100%\"> <tr><td>Placement</td><td>User ID</td><td>Number of tries</td><td>Time used</td><td>Score</td></tr>"
+		$.each(resp, function(i, item){
+			HSP += "<tr><td>"+(i+1)+"</td><td>"+item.student_Id+"</td><td>"+item.number_of_tries+"</td><td>"+item.time_used+"</td><td>"+item.score.toFixed(3)+"</td></tr>";
+                       
+		});
+		HSP += "</table>";
+	    var mywindow = window.open('', 'PRINT', 'height=800,width=1000');
+
+	    mywindow.document.write('<html><head><title>' + "Highscores"  + '</title>');
+	    mywindow.document.write('</head><body>');
+	    mywindow.document.write('<center><h1>' + "Galgeleg Highscore List"  + '</h1></center>');
+	    mywindow.document.write(HSP);
+	    mywindow.document.write('</body></html>');
+
+	    mywindow.document.close(); // necessary for IE >= 10
+	    mywindow.focus(); // necessary for IE >= 10*/
+
+	    mywindow.print();
+	    mywindow.close();
+
+	    return true;
+	}
 });
