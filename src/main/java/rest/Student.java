@@ -18,6 +18,7 @@ import galgeleg.GalgeI;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import static rest.GameLogic.game;
@@ -46,16 +47,16 @@ public class Student {
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserDTO> ShowStudents(@PathParam("id") String id) {
+    public Response ShowStudents(@PathParam("id") String id) {
         List<UserDTO> allStudents = null;
 
         try {
             allStudents = soapI.getStudent(id);
-            System.out.println(allStudents);
-        } catch (DALException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            return Response.ok(allStudents, MediaType.APPLICATION_JSON).build();
+        
+        } catch (DALException e) {    
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Entity not found:" +e.toString()).build();
         }
-        return allStudents;
+
     }
 }

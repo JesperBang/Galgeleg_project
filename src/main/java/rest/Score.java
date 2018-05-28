@@ -17,6 +17,7 @@ import database.UserDTO;
 import galgeleg.GalgeI;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.ws.rs.core.Response;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import static rest.GameLogic.game;
@@ -42,16 +43,15 @@ public class Score {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<UserDTO> ShowScores() {
+    public Response ShowScores() {
         List<UserDTO> allScores = null;
 
         try {
             allScores = soapI.getStudentList();
-            System.out.println(allScores);
+            return Response.ok(allScores, MediaType.APPLICATION_JSON).build();
         } catch (DALException e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Entity not found:" +e.toString()).build();
             // TODO Auto-generated catch block
-            e.printStackTrace();
         }
-        return allScores;
     }
 }

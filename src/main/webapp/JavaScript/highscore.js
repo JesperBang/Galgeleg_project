@@ -53,20 +53,16 @@ $(document).ready(function () {
                 });
 
             },
-
             //error function
             error: function (error) {
-                localStorage.clear();
                 document.getElementById("hsError").style.visibility = "visible";
-                alert("Error, timed out");
+                alert(error);
             }
         });
         document.getElementById("hsLoad").style.visibility = "hidden";
 
         return false;
     }
-
-
 
     document.getElementById("testprint").addEventListener("click", function prinths() {
 
