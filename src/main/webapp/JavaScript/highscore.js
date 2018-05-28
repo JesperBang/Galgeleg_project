@@ -45,7 +45,7 @@ function populateTable() {
 	$.each(allUsers, function(i, item) {
             $('<tr>').append(
                 $('<td>').text(i+1),
-                $('<td>').text(item.student_Id),
+                $('<td>').html("<a target=\"_parent\" href=\"http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/student/"+item.student_Id+"\">"+item.student_Id+"</a>"),
 		$('<td>').text(item.number_of_tries),
 		$('<td>').text(item.time_used),
 		$('<td>').text(item.score.toFixed(3))			
@@ -65,6 +65,8 @@ function populateTable() {
   
     return false;		
 }
+
+
 
 document.getElementById("testprint").addEventListener("click", function prinths() {
 
