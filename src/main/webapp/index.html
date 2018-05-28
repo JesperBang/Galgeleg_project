@@ -34,7 +34,7 @@
 				style="font-size: 36px;"></button>
 			<div class="dropdown-content">
 	<!--<a href="#" onclick="setframe('user.html');" >Bruger Info</a> TO BE IMPLEMENTED-->
-                                    <a href="loginPage.html">Logout</a>
+                                    <a onclick="logout()" href="loginPage.html">Logout</a>
 			</div>
 		</div>
         
@@ -45,11 +45,18 @@
     <script> 
     function popframe(){
         if(count == 0){
-            document.getElementById('frames').innerHTML = "<iframe id=\"frame\" src=\"highscorelist.html\" style=\"width: 100%; height: 1000px;\"></iframe>"
+            document.getElementById('frames').innerHTML = "<iframe id=\"frame\" scrolling=\"auto\" src=\"highscorelist.html\" style=\"width: 100%; height: 1000px \"></iframe>"
             count++;
         }
     }    
+
     var count = 0;
+    
+    function logout() {
+        alert("logged out");
+        localStorage.setItem("user", null);  
+    }
+    
     $( document ).ajaxSend(function( event, jqxhr, settings ) {
 	    jqxhr.setRequestHeader("Authorization", "Bearer " + localStorage.getItem("user"))
 	});

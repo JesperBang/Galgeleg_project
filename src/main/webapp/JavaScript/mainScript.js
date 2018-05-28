@@ -57,11 +57,11 @@
             }	
 	});
         return false;
-       
     });
+    
 
 });
- 
+
  function setframe(url) {
 	document.all.frame.src=url;
 }
