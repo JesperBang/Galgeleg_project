@@ -102,19 +102,14 @@ $(document).ready(function () {
             data: JSON.stringify(bogstav),
             dataType: "text",
             success: function (resp) {
-                if (resp == null) {
-
-                } else {
-
                     getSynligtOrd();
                     erSpilletTabt();
                     erSpilletVundet();
                     getBrugteBogstaver();
                     logStatus();
-                }
             },
             error: function (error) {
-
+                alert(error.status + "! Failed to guess letter.");
             }
 
 
@@ -130,14 +125,12 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json',
             success: function (brugtebogstaver) {
-
                 usedLetters = brugtebogstaver;
                 document.getElementById("usedLetters").innerHTML = usedLetters;
                 console.log(usedLetters);
-
             },
             error: function (error) {
-
+                alert(error.status + "! Failed to get used words.");
             }
         });
 
@@ -221,16 +214,17 @@ $(document).ready(function () {
         $.ajax({
             url: path + "/game/erspillettabt",
             method: 'GET',
-            dataType: "",
-            success: function (status) {
-                if (status === true) {
+            dataType: "text",
+            success: function (resp) {
+                console.log(resp);
+                if(resp == "true"){
                     document.getElementById("gætord").disabled = true;
                     document.getElementById("infotext").textContent = "Desværre! Du tabte spillet! Hent et nyt ord for at spille igen!";
-
                 }
             },
             error: function (error) {
-
+                console.log("err "+error);
+                alert(error.status + "! Failed to get game status.");
             }
         });
         return false;

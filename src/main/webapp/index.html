@@ -65,22 +65,20 @@
          url: 'http://localhost:8084/mavenproject1/rest/validatejwt',
          method: 'GET',
          crossDomain: 'true',
+         dataType: "text",
          success: function(resp){
-             console.log(resp);
-            if(resp == false){
-                if (confirm('You are not logged in so your highscore will not be saved. \n Do you want to log in now?')) {
-                    location.href = 'loginPage.html';
-                }else{
-                    setframe("galgespil.html");
-                }
-            }else if(resp == true){
+            console.log(resp);
+            setframe("galgespil.html");
+         },
+        error: function(response) {
+            console.log(response);
+            if (confirm('You are not logged in so your highscore will not be saved. \n Do you want to log in now?')) {
+                location.href = 'loginPage.html';
+            }else{
                 setframe("galgespil.html");
             }
-         },
-         error: function(response) {
-             alert("Error, timed out");
-         }
-     });
+        }
+    });
 
     return false;
 }

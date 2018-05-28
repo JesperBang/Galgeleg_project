@@ -17,6 +17,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import jwtHandler.JWTHandler;
@@ -139,31 +140,31 @@ public class GameLogic {
     @Path("erspillettabt")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Boolean ErSpilletTabt() throws MalformedURLException {
+    public Response ErSpilletTabt() throws MalformedURLException {
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
         try {
             Boolean response = game.erSpilletTabt();
-            return response;
+            return Response.ok(response, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return false;
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed with error: \n\n" +e.toString()).build();
         }
     }
 
     @Path("gaetbogstav")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String GaetBogstav(String guess) throws MalformedURLException {
+    public Response GaetBogstav(String guess) throws MalformedURLException {
         JSONObject input = new JSONObject(guess);
         String header = request.getHeader("Authorization");
         System.out.println("header: " + header);
 
         try {
             game.gætBogstav(input.getString("bogstav"));
-            return "Success";
+            return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
-            return null;
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed with error: \n\n" +e.toString()).build();
         }
     }
 
