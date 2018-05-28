@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 });
 //var path = 'http://ubuntu4.saluton.dk:20002/mavenproject1/rest/game';
-var path = 'http://localhost:8084/mavenproject1/rest/game';
+var path = 'http://localhost:8084/mavenproject1/rest';
 //var path = 'http://ubuntu4.saluton.dk:20002/s144211_testbuild/rest/game';
                 
 var string;
@@ -20,11 +20,11 @@ var wrongs = 0;
 
 
 function start(){ 
+ 
     document.getElementById("livesLeft").innerHTML = lives;
     getOrdet();
 
 }
-
 
 function getOrdet() {
     nulstil();
@@ -35,7 +35,7 @@ function getOrdet() {
     document.getElementById("usedLetters").innerHTML = usedLetters;
    
     $.ajax({
-         url: path+'/getordet',
+         url: path+'/game/getordet',
          method: 'GET',
          crossDomain: 'true',
          dataType: 'text',
@@ -64,7 +64,7 @@ function gætBogstav() {
            
     
     $.ajax({
-        url: path+"/gaetbogstav",
+        url: path+"/game/gaetbogstav",
         contentType: "application/json",
         method: 'POST',
         data: JSON.stringify(bogstav),
@@ -94,7 +94,7 @@ function gætBogstav() {
 function getBrugteBogstaver() {
     
     $.ajax({
-        url: path+"/getbrugtebogstaver",
+        url: path+"/game/getbrugtebogstaver",
         method: 'GET',
         dataType: 'json',
         success: function(brugtebogstaver){
@@ -114,7 +114,7 @@ function getBrugteBogstaver() {
 function nulstil() {
     
     $.ajax({
-        url: path+"/nulstil",
+        url: path+"/game/nulstil",
         method: 'GET',
         dataType: 'text',
         success: function(response){
@@ -138,7 +138,7 @@ function nulstil() {
 function getSynligtOrd() {
     
     $.ajax({
-        url: path+"/getsynligtord",
+        url: path+"/game/getsynligtord",
         method: 'GET',
         dataType: "text",
         success: function(synligtOrd){
@@ -159,7 +159,7 @@ function getSynligtOrd() {
 function erSpilletVundet(){
     
     $.ajax({
-        url: path+"/erspilletvundet",
+        url: path+"/game/erspilletvundet",
         method: 'GET',
         dataType: "",
         success: function(status){
@@ -180,7 +180,7 @@ function erSpilletVundet(){
 function erSpilletTabt(){
     
     $.ajax({
-        url: path+"/erspillettabt",
+        url: path+"/game/erspillettabt",
         method: 'GET',
         dataType: "",
         success: function(status){
@@ -202,7 +202,7 @@ function erSpilletTabt(){
 function logStatus() {
   
     $.ajax({
-        url: path+"/logstatus",
+        url: path+"/game/logstatus",
         method: 'GET',
         success: function(response){
             if(response==null){}
