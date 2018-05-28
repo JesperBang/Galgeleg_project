@@ -43,8 +43,8 @@ public class PostScore {
     }
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response PostScore(String scoredata) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response PostScore(String scoredata) throws AuthException {
         //Fetching input from JSON body
         JSONObject input = new JSONObject(scoredata);  
         
@@ -61,14 +61,15 @@ public class PostScore {
             //requesting score creation with userDTO info
             soapI.createScore(user);
             
-              if(JWTHandler.validateToken(input.getString("jwt"))==null){
-            return Response.status(Response.Status.UNAUTHORIZED).entity( "failed to post score: Empty token.").build();
-          }
-            else
-                 return Response.status(Response.Status.CREATED).entity("Score of: " + input.getDouble("score") + " was posted for user" + input.getString("username")).build();
+
+                 return Response.status(Response.Status.CREATED).entity("Score of " + input.getDouble("score") + " was posted for user " + input.getString("username")).build();
+
         
         } catch (AuthException ae) {
-           
+                         if(JWTHandler.validateToken(input.getString("jwt"))==null){
+            return Response.status(Response.Status.UNAUTHORIZED).entity( "failed to post score: Empty token.").build();
+          }
+                         else
             return Response.status(Response.Status.UNAUTHORIZED).entity("failed to post score with error\n\n" + ae.toString()).build();
         }
         catch (JSONException e){

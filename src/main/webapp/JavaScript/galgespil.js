@@ -38,7 +38,7 @@ function start(){
  
     document.getElementById("livesLeft").innerHTML = lives;
     getOrdet();
-
+    getSynligtOrd();
 }
 
 function fn60sec() {
@@ -73,11 +73,11 @@ function getOrdet() {
          dataType: 'text',
          success: function(response){
              word = response;
-             console.log(word);
                 
             string = answers.join(" ");
             document.getElementById("answer").innerHTML = string;
             getSynligtOrd();
+            console.log(word);
              
          },
          error: function(response) {
@@ -204,7 +204,6 @@ function erSpilletVundet(){
             }
         },
         error: function(error){
-            
         }
     });
     return false;
@@ -284,11 +283,13 @@ function postscore() {
         method: 'POST',
         data: JSON.stringify(score),
         dataType: "application/json",
+        
         success: function(resp){
-            
+            console.log("success function " +resp);
         },
         error: function(error) {
-            alert(resp.status +"! Authentication error.");
+            console.log(error)
+            //alert(error.status +": " + error.responseText);
         }   
     });
     
