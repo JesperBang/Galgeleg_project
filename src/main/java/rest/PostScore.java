@@ -73,11 +73,8 @@ public class PostScore {
             return Response.status(Response.Status.CREATED).entity(hyper).build();
 
         } catch (AuthException ae) {
-            if (JWTHandler.validateToken(input.getString("jwt")) == null) {
-                return Response.status(Response.Status.UNAUTHORIZED).entity("failed to post score: Empty token.").build();
-            } else {
-                return Response.status(Response.Status.UNAUTHORIZED).entity("failed to post score with error\n\n" + ae.toString()).build();
-            }
+            return Response.status(Response.Status.UNAUTHORIZED).entity("401! failed to post score with error\n\n" + ae.toString()).build();
+
         } catch (JSONException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity("failed to post score with error\n\n" + e.toString()).build();
         }

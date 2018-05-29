@@ -50,7 +50,7 @@ public class JWTHandler {
 			 System.out.println(UserDTO);
 			 return Jwts.parser().setSigningKey(key).parseClaimsJws(tokenString);
 		} catch (ExpiredJwtException e) {
-			throw new AuthException("Token too old!");
+                        throw new AuthException("Token too old!");
 		} catch (UnsupportedJwtException e) {
 			throw new AuthException("UnsupportedToken");
 		} catch (MalformedJwtException e) {
